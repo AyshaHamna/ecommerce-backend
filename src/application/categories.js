@@ -8,7 +8,7 @@ export const getCategories = async (req, res) => {
 
 export const createCategory = async (req, res) => {
     const category = createCategoryDto.safeParse(req.body);
-    if (!category.success) return res.status(400).json({ message: "Invalid data" }).send();
+    if (!category.success) return res.status(400).json({ message: "Invalid data" });
 
 
     await Category.create({
@@ -23,6 +23,6 @@ export const getCategoryById = async (req, res) => {
     //const category = categories.find((category) => category.id === id); //used when fetching from hard coded array
 
     const category = await Category.findById(id);
-    if (!category) return res.status(404).json({ message: "Category not found" }).send();
+    if (!category) return res.status(404).json({ message: "Category not found" });
     return res.status(200).json(category).send();
 }

@@ -52,7 +52,7 @@ export const getOrderById = async (req, res) => {
   return res.status(200).json(order);
 };
 
-export const getOrderByUser = async (req, res) => {
+export const getOrdersByUser = async (req, res) => {
   const userId = req.params.userId;
 
   const orders = await Order.find({ userId: userId }).populate({
@@ -66,5 +66,5 @@ export const getOrderByUser = async (req, res) => {
 // export const getOrdersForUser = async (req, res) => {
 //     const userId = req.params.userId;
 //     const orders = await Order.find({userId: userId});
-//     return res.status(200).json(orders).send();
+//     return res.status(200).json(orders);
 // }
