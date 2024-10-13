@@ -5,12 +5,15 @@ import { connectDB } from "./infrastructure/db.js";
 import ordersRouter from "./api/orders.js";
 import { globalErrorHandler } from "./api/middleware/global-error-handler.js";
 import cors from "cors";
-import 'dotenv/config';
+import "dotenv/config";
 
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+app.use(cors());
+
+connectDB();
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
@@ -18,10 +21,5 @@ app.use("/api/orders", ordersRouter);
 
 app.use(globalErrorHandler);
 
-const PORT = 8000;
-
-connectDB();
-
-app.listen(8000, () => {
-  console.log(`server is running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}.`));
